@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
-
-import { TabsPage } from '../pages/tabs/tabs';
-
+import { ChatPage } from '../pages/chat/chat';
+import * as io from "socket.io-client";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = TabsPage;
+  rootPage = ChatPage;
+  private socket = io();
 
   constructor(platform: Platform) {
     platform.ready().then(() => {
