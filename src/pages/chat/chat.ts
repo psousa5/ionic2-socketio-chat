@@ -32,18 +32,6 @@ export class ChatPage {
     console.log('ionViewDidLoad ChatPage');
   }
 
-  sendUsername(){
-    if(this.user.nickname.length > 3){
-      this.login();
-    }else{
-      let toast = this.toastCtrl.create({
-        message: "Nickname zu kurz!",
-        duration: 5000
-      });
-      toast.present();
-    }
-  }
-
   logout(){
     this.socket.emit('logout');
     this.storage.clear();
@@ -53,9 +41,8 @@ export class ChatPage {
   isLoggedIn(){
     this.storage.get('user').then(
       (user) => {
-        if(user.nickname){
-          this.user = user;
-          this.login();
+        if(user){
+          this.login(user.nickname);
         }
       }
     ).catch(
@@ -65,12 +52,21 @@ export class ChatPage {
     );
   }
 
-  private login(){
-    this.socket.emit('login', this.user.nickname);
-    this.socket.on('list-users', function(users){
-      console.log(users);
-    });
-    this.storage.set('user', this.user);
+  private login(nickname: string){
+    if(nickname.length > 3){
+      this.socket.emit('login', nickname);
+      this.socket.on('list-users', function(users){
+        console.log(users);
+      });
+      this.user.nickname = nickname;
+      this.storage.set('user', this.user);
+    }else{
+      let toast = this.toastCtrl.create({
+        message: "Nickname zu kurz!",
+        duration: 5000
+      });
+      toast.present();
+    }
   }
 
 }

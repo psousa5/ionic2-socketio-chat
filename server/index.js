@@ -15,7 +15,7 @@ io.on('connection', function(socket){
   socket.on('login', function(nickname) {
     socket.nickname = nickname;
     users.push(socket.nickname);
-    socket.emit('list-users', removeMe(socket));
+    socket.emit('list-users', users);
     console.log(users);
   });
 
@@ -29,13 +29,6 @@ io.on('connection', function(socket){
     console.log(users);
   });
 });
-
-function removeMe(socket){
-  var i = users.indexOf(socket.nickname);
-  var onlineUsers = users;
-  if(i != -1) onlineUsers.splice(i, 1);
-  return onlineUsers;
-}
 
 function logout(socket){
   var i = users.indexOf(socket.nickname);
