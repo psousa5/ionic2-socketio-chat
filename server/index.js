@@ -5,35 +5,21 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var users = [];
+var users = {};
 
 app.get('/', function(req, res){
   res.send('asd');
 });
 
 io.on('connection', function(socket){
-  socket.on('login', function(nickname) {
-    socket.nickname = nickname;
-    users.push(socket.nickname);
-    socket.emit('list-users', users);
-    console.log(users);
-  });
-
-  socket.on('logout', function() {
-    logout(socket);
-    console.log(users);
-  });
+  console.log("user connected");
 
   socket.on('disconnect', function(){
-    logout(socket);
-    console.log(users);
+    console.log("user disconnected");
   });
+
 });
 
-function logout(socket){
-  var i = users.indexOf(socket.nickname);
-  if(i != -1) users.splice(i, 1);
-}
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
