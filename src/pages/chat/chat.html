@@ -7,33 +7,18 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Chat with your friends</ion-title>
-    <ion-buttons end *ngIf="user.nickname">
-      <button ion-button icon-only color="royal" (click)="logout()">
-        <ion-icon name="exit"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-input type="text" placeholder="Message"></ion-input>
+    <ion-buttons end>
+      <button ion-button icon-right color="royal">
+        <ion-icon name="send"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
-
-
-<ion-content padding>
-  <div *ngIf="!user.nickname">
-    <ion-list>
-      <ion-item>
-        <ion-input #nickname type="text" placeholder="Username"></ion-input>
-      </ion-item>
-    </ion-list>
-    <button ion-button (click)="login(nickname.value)">Login</button>
-  </div>
-  <ion-footer *ngIf="user.nickname">
-    <ion-toolbar>
-      <p>Ash, Misty, Brock</p>
-      <ion-buttons end>
-        <button ion-button icon-right color="royal">
-          Send
-          <ion-icon name="send"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-footer>
-</ion-content>
+</ion-footer>

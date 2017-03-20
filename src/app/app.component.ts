@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 import { SocketProvider } from "../providers/socket-provider";
-import { LoginPage } from "../pages/login/login";
+import {ChatPage} from "../pages/chat/chat";
 
 @Component({
   templateUrl: 'app.html',
   providers: [SocketProvider]
 })
 export class MyApp {
-  rootPage = LoginPage;
+  rootPage = ChatPage;
   private socket: any;
 
   constructor(platform: Platform, private socketProvider: SocketProvider) {

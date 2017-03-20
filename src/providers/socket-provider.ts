@@ -5,18 +5,16 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class SocketProvider {
 
-  private socket: any;
+  private socket_instance: any;
 
   public constructor(){}
 
   public io(hostUrl: string){
-    if(this.socket) return this.socket;
-    this.setup(hostUrl);
-    return this.socket;
+    this.socket_instance = io(hostUrl);
   }
 
-  private setup(hostUrl: string){
-    if(!this.socket) this.socket = io(hostUrl);
+  public socket(){
+    return this.socket_instance;
   }
 
 }

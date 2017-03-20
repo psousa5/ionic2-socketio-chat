@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import {SocketProvider} from "../../providers/socket-provider";
 
 /*
   Generated class for the Login page.
@@ -13,10 +14,14 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  private socket: any;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+  constructor(public navCtrl: NavController, public navParams: NavParams, public io: SocketProvider) {}
+
+  login(username: string){
+    if(username.length >= 2){
+      this.io.socket().emit('login', username);
+    }
   }
 
 }

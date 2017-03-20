@@ -14,5 +14,10 @@
 
 
 <ion-content padding>
-
+    <ion-list>
+      <ion-item>
+        <ion-input #username type="text" placeholder="Username"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button (click)="login(username.value)">Login</button>
 </ion-content>

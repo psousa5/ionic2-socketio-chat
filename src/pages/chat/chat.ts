@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {NavController, ToastController} from 'ionic-angular';
-import {User} from "../../app/User";
 import {Storage} from "@ionic/storage";
 import {SocketProvider} from "../../providers/socket-provider";
 
@@ -16,10 +15,18 @@ import {SocketProvider} from "../../providers/socket-provider";
 })
 export class ChatPage {
 
+  private socketio: any;
+
   constructor(
     public navCtrl: NavController,
     public toastCtrl: ToastController,
     public storage: Storage,
     public socket: SocketProvider
-  ) {}
+  ) {
+    socket.io("http://localhost:3000");
+    this.socket.socket().on("test-channel:App\\Events\\ChatMessage", function(message){
+      // increase the power everytime we load test route
+      console.log(message);
+    });
+  }
 }
