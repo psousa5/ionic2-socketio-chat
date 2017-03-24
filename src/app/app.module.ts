@@ -2,15 +2,15 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { ChatPage } from "../pages/chat/chat";
-import { LoginPage } from "../pages/login/login";
 import { IonicStorageModule } from '@ionic/storage';
+import { MessengerPage } from "../pages/messenger/messenger";
 import {SocketProvider} from "../providers/socket-provider";
 
 @NgModule({
   declarations: [
     MyApp,
     ChatPage,
-    LoginPage
+    MessengerPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -20,11 +20,10 @@ import {SocketProvider} from "../providers/socket-provider";
   entryComponents: [
     MyApp,
     ChatPage,
-    LoginPage
+    MessengerPage
   ],
   providers: [
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SocketProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
 import {NavController, ToastController} from 'ionic-angular';
 import {Storage} from "@ionic/storage";
-import {SocketProvider} from "../../providers/socket-provider";
+import {Http, Response} from "@angular/http";
+import {Observable} from "rxjs";
+import { AlertController } from 'ionic-angular';
+import {MessengerPage} from "../messenger/messenger";
+import * as io from 'socket.io-client';
+import {User} from "../../app/User";
 
 /*
   Generated class for the Chat page.
@@ -14,19 +19,51 @@ import {SocketProvider} from "../../providers/socket-provider";
   templateUrl: 'chat.html'
 })
 export class ChatPage {
-
-  private socketio: any;
+  private currentUser: User;
+  public users: any = [];
+  private socket: any;
+  private unreadMessages: Array<any> = [];
 
   constructor(
     public navCtrl: NavController,
-    public toastCtrl: ToastController,
     public storage: Storage,
-    public socket: SocketProvider
-  ) {
-    socket.io("http://localhost:3000");
-    this.socket.socket().on("test-channel:App\\Events\\ChatMessage", function(message){
-      // increase the power everytime we load test route
-      console.log(message);
+    public http: Http
+  ) {}
+
+  ngOnInit() {
+    this.socket = io('http://localhost:3000');
+
+    this.login();
+
+    this.socket.on('whisper', (whisper) => {
+      this.unreadMessages.push(whisper);
+      console.log(this.unreadMessages);
     });
+
+    this.socket.on('users', (users) => {
+      this.users = users;
+      let index = this.users.indexOf(this.currentUser.username, 0);
+      if (index > -1) {
+        this.users.splice(index, 1);
+      }
+    });
+  }
+
+  public login(){
+    let name = this.generateRandomName();
+    this.currentUser = new User(name, this.socket.id);
+    this.socket.emit('login', name);
+  }
+
+  public openChat(username: string){
+    this.navCtrl.push(MessengerPage, {
+      from: this.currentUser.username,
+      to: username,
+      socket: this.socket
+    });
+  }
+
+  private generateRandomName(): string{
+    return Math.random().toString(36).substring(7);
   }
 }

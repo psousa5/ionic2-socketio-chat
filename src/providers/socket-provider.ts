@@ -5,16 +5,21 @@ import * as io from 'socket.io-client';
 @Injectable()
 export class SocketProvider {
 
-  private socket_instance: any;
+  private _socket: any;
 
-  public constructor(){}
+  public constructor(){
+    console.log("new instance created");
+  }
 
   public io(hostUrl: string){
-    this.socket_instance = io(hostUrl);
+    this._socket = io(hostUrl);
   }
 
-  public socket(){
-    return this.socket_instance;
+  get socket(): any {
+    return this._socket;
   }
 
+  set socket(value: any) {
+    this._socket = value;
+  }
 }
