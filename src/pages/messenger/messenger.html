@@ -7,17 +7,22 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>messenger</ion-title>
+    <ion-title>{{to}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding></ion-content>
+<ion-content padding>
+    <ol ion-item *ngFor="let message of messages" no-lines>
+      <li class="chat-message" *ngIf="message.to === to">{{ message.text }}</li>
+      <li class="chat-message chat-message-me" *ngIf="message.from !== to">{{ message.text }}</li>
+    </ol>
+</ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-input type="text" placeholder="Message" #messageInput></ion-input>
+    <ion-input type="text" placeholder="Message" #messageInput [value]=messageText></ion-input>
     <ion-buttons end>
       <button ion-button icon-right color="royal" (click)="sendWhisper(messageInput.value)">
         <ion-icon name="send"></ion-icon>

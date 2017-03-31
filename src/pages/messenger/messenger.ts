@@ -16,7 +16,9 @@ import {Observable} from "rxjs";
 export class MessengerPage {
 
   private socket: any;
-  public messages: any;
+  public messages: any = [];
+  public messageText: string;
+  private to: any;
 
   constructor(
     public navCtrl: NavController,
@@ -24,30 +26,36 @@ export class MessengerPage {
     public http: Http
   ) {}
 
-  ionViewDidLoad(){}
+  ionViewDidLoad(){
+
+  }
 
   ngOnInit(){
     this.socket = this.navParams.get('socket');
-
+    this.to = this.navParams.get('to');
     this.socket.on('whisper', (message) => {
-      console.log(message);
+      if(message.whisper.from = this.to){
+        this.messages.push(message.whisper);
+        console.log(this.messages);
+      }
     });
-
   }
 
   public sendWhisper(messageText: string){
     console.log('fired: ' + messageText.length);
     if(messageText.length > 0){
-      this.http.post('http://localhost/ionic2-socketio-chat-server/public/whisper', {
+      let whisper = {
         from: this.navParams.get('from'),
         to: this.navParams.get('to'),
         text: messageText
-      })
-        .map(this.extractData)
+      };
+      this.http.post('http://localhost/ionic2-socketio-chat-server/public/whisper', whisper).map(this.extractData)
         .catch(this.handleError)
         .subscribe(
           data => {
-            console.log(data);
+            this.messages.push(whisper);
+            console.log(this.messages);
+            this.messageText = "";
           }
         );
     }

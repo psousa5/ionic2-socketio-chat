@@ -35,9 +35,9 @@ export class ChatPage {
 
     this.login();
 
-    this.socket.on('whisper', (whisper) => {
-      this.unreadMessages.push(whisper);
-      console.log(this.unreadMessages);
+    this.socket.on('whisper', (message) => {
+      this.unreadMessages.push(message);
+      //console.log(this.unreadMessages);
     });
 
     this.socket.on('users', (users) => {
