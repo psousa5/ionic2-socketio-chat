@@ -15,16 +15,12 @@
 
 <ion-content padding>
     <div *ngFor="let message of messages" no-lines>
-      <div *ngIf="message.sender !== sender">
-        <!--<span class="triangle-left"></span>-->
-         <div class="chat-message">{{ message.text }}</div>
-      </div>
+      <!--<span class="triangle-left"></span>-->
+      <div class="chat-message chat-message" *ngIf="message.sender !== sender">{{ message.text }}</div>
 
-      <div *ngIf="message.sender === sender">
-        <!--<span class="triangle-right"></span>-->
-        <div class="chat-message chat-message-me">{{ message.text }}</div>
-      </div>
-
+      <!--<span class="triangle-right"></span>-->
+      <div class="chat-message chat-message-me" *ngIf="message.sender === sender">{{ message.text }}</div>
+      <div style="clear: both;"></div>
     </div>
 </ion-content>
 

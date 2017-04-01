@@ -3,15 +3,20 @@ page-messenger {
     color: #5c5c5c;
     background: #e6ebf0;
     padding: 10px 15px;
-    display: inline-block;
     max-width: 90%;
     margin-bottom: 10px;
     border-radius: 5px;
+    float: left;
   }
+
   .chat-message-me {
     background: dodgerblue;
     color: white;
-    float: right;
+    float: right !important;
+  }
+
+  .message-wrapper{
+    height: auto;
   }
 
 /*  .triangle-left {
