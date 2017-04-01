@@ -1,13 +1,36 @@
 page-messenger {
-  .chat-message{
+  .chat-message {
     color: #5c5c5c;
     background: #e6ebf0;
     padding: 10px 15px;
-    border-radius: 52px;
     display: inline-block;
+    max-width: 90%;
+    margin-bottom: 10px;
+    border-radius: 5px;
   }
-  .chat-message-me{
+  .chat-message-me {
     background: dodgerblue;
     color: white;
+    float: right;
   }
-}
+
+/*  .triangle-left {
+    border-style: solid;
+    border-width: 0 15px 15px 0;
+    border-color: transparent #e6ebf0;
+    display: inline-block;
+    width: 0;
+    z-index: 1;
+    float: left;
+  }
+
+  .triangle-right {
+      border-style: solid;
+      border-width: 0 0 15px 15px;
+      border-color: transparent #1e90ff;
+      display: inline-block;
+      width: 0;
+      z-index: 1;
+      float: right;
+    }*/
+  }

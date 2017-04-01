@@ -4,7 +4,7 @@ import { MyApp } from './app.component';
 import { ChatPage } from "../pages/chat/chat";
 import { IonicStorageModule } from '@ionic/storage';
 import { MessengerPage } from "../pages/messenger/messenger";
-import {SocketProvider} from "../providers/socket-provider";
+import { ElasticModule } from 'angular2-elastic';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import {SocketProvider} from "../providers/socket-provider";
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ElasticModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

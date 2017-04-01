@@ -4,12 +4,12 @@
 
 export class Message{
   text: string;
-  from: string;
-  to: string;
+  sender: string;
+  receiver: string;
 
-  constructor(text: string, from: string, to: string) {
+  constructor(text: string, sender: string, receiver: string) {
     this.text = text;
-    this.from = from;
-    this.to = to;
+    this.sender = sender;
+    this.receiver = receiver;
   }
 }

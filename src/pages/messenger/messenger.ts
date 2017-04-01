@@ -18,7 +18,8 @@ export class MessengerPage {
   private socket: any;
   public messages: any = [];
   public messageText: string;
-  private to: any;
+  private sender: string;
+  private receiver: string;
 
   constructor(
     public navCtrl: NavController,
@@ -32,9 +33,10 @@ export class MessengerPage {
 
   ngOnInit(){
     this.socket = this.navParams.get('socket');
-    this.to = this.navParams.get('to');
+    this.sender = this.navParams.get('sender');
+    this.receiver = this.navParams.get('receiver');
     this.socket.on('whisper', (message) => {
-      if(message.whisper.from = this.to){
+      if(message.whisper.sender = this.receiver){
         this.messages.push(message.whisper);
         console.log(this.messages);
       }
@@ -45,8 +47,8 @@ export class MessengerPage {
     console.log('fired: ' + messageText.length);
     if(messageText.length > 0){
       let whisper = {
-        from: this.navParams.get('from'),
-        to: this.navParams.get('to'),
+        sender: this.navParams.get('sender'),
+        receiver: this.navParams.get('receiver'),
         text: messageText
       };
       this.http.post('http://localhost/ionic2-socketio-chat-server/public/whisper', whisper).map(this.extractData)

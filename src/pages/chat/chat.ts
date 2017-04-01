@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import {NavController, ToastController} from 'ionic-angular';
 import {Storage} from "@ionic/storage";
 import {Http, Response} from "@angular/http";
-import {Observable} from "rxjs";
-import { AlertController } from 'ionic-angular';
 import {MessengerPage} from "../messenger/messenger";
 import * as io from 'socket.io-client';
 import {User} from "../../app/User";
@@ -57,8 +55,8 @@ export class ChatPage {
 
   public openChat(username: string){
     this.navCtrl.push(MessengerPage, {
-      from: this.currentUser.username,
-      to: username,
+      sender: this.currentUser.username,
+      receiver: username,
       socket: this.socket
     });
   }
